@@ -2,7 +2,7 @@ package com.mshcc.plugin.lazycode.entity;
 
 import com.mshcc.plugin.lazycode.complex.GlobalConstant;
 
-/*
+/**
  * @Author msh
  * @Date 2021/9/29 上午11:28
  * @Description 树形视图节点，根据type显示相应的icon图标

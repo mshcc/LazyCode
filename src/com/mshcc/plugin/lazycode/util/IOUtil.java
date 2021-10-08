@@ -1,4 +1,4 @@
-package com.mshcc.plugin.lazycode.file;
+package com.mshcc.plugin.lazycode.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.mshcc.plugin.lazycode.complex.GlobalConstant.*;
 
-/*
+/**
  * @Author msh
  * @Date 2021/9/29 下午2:14
  * @Description 与配置文件进行交互
@@ -40,7 +40,8 @@ public class IOUtil {
      * @param fileName 文件名称
      */
     public static void write(String content, String fileName) {
-        try (FileWriter writer = new FileWriter(getFilePath(fileName))) {
+        String path = getFilePath(fileName);
+        try (FileWriter writer = new FileWriter(path)) {
             writer.write("[".concat(content).concat("]"));
             writer.flush();
         } catch (IOException e) {
@@ -56,9 +57,12 @@ public class IOUtil {
      */
     public static <T> List<T> getList(Type type, String fileName) {
         String path = getFilePath(fileName);
+        System.out.println("path = " + path);
         File file = new File(path);
         if (!file.exists()) {
             try {
+                file.mkdirs();
+                file.delete();
                 file.createNewFile();
                 FileWriter writer = new FileWriter(path);
                 writer.write("[]");

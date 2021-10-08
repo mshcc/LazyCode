@@ -20,7 +20,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 import static com.mshcc.plugin.lazycode.complex.GlobalConstant.*;
 
-/*
+/**
  * @Author msh
  * @Date 2021/9/29 下午2:12
  * @Description 插件的初始化方法

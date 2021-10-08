@@ -7,7 +7,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 
-/*
+/**
  * @Author msh
  * @Date 2021/9/29 上午11:52
  * @Description 继承SimpleTree类，重写paintComponent方法，实现树状视图为空时的文字提示

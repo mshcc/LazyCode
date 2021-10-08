@@ -6,7 +6,7 @@ import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.wm.ToolWindow;
 import com.mshcc.plugin.lazycode.complex.Init;
 
-/*
+/**
  * @Author msh
  * @Date 2021/9/29 下午2:12
  * @Description 创建插件组件窗口

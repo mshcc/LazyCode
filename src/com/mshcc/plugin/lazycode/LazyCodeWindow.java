@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
-/*
+/**
  * @Author msh
  * @Date 2021/9/28 下午4:56
  * @Description 插件的入口

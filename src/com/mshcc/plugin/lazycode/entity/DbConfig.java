@@ -1,15 +1,13 @@
 package com.mshcc.plugin.lazycode.entity;
 
-
-
 import java.util.Objects;
-/*
+
+/**
  * @Author msh
  * @Date 2021/9/29 上午11:33
  * @Description 数据库链接所需要的信息
  */
 public class DbConfig {
-
     /**
      * 链接保存名称
      */

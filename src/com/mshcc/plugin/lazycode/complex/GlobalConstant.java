@@ -10,7 +10,7 @@ import java.io.File;
 import java.lang.reflect.Type;
 import java.util.List;
 
-/*
+/**
  * @Author msh
  * @Date 2021/9/28 下午5:17
  * @Description 插件用到的全局属性以及常量
@@ -79,5 +79,7 @@ public class GlobalConstant {
     /**
      * 配置文件路径
      */
-    public static String CONFIGURATION_FILE_PATH = File.pathSeparator.concat(".idea").concat(File.pathSeparator).concat("lazyCode").concat(File.pathSeparator);
+    public static String CONFIGURATION_FILE_PATH = File.separator.concat(".idea").concat(File.separator ).concat("lazyCode").concat(File.separator );
+
+
 }

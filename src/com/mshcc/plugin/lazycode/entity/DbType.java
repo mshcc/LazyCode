@@ -1,6 +1,6 @@
 package com.mshcc.plugin.lazycode.entity;
 
-/*
+/**
  * @Author msh
  * @Date 2021/9/29 上午11:38
  * @Description 数据库枚举类型
