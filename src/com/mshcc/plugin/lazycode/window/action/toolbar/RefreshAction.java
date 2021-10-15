@@ -1,4 +1,4 @@
-package com.mshcc.plugin.lazycode.window.action;
+package com.mshcc.plugin.lazycode.window.action.toolbar;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;

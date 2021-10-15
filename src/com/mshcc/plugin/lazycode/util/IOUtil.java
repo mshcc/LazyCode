@@ -1,5 +1,9 @@
 package com.mshcc.plugin.lazycode.util;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mshcc.plugin.lazycode.entity.DbConfig;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -19,12 +23,24 @@ public class IOUtil {
 
 
     /**
+     * gson json解析器，用于数据的序列化和反序列化
+     */
+    public static final Gson GSON = new Gson();
+
+    /**
+     * Gson List反序列化所需类型
+     */
+    public static final Type DB_CONFIG_LIST_TYPE = new TypeToken<List<DbConfig>>() {
+    }.getType();
+
+    /**
      * @param <T> 泛型
      * @return 数据库链接信息列表
      */
     public static <T> List<T> getDatabaseConfigList() {
         return getList(DB_CONFIG_LIST_TYPE, DB_CONFIG_FILE);
     }
+
 
     /**
      * 将数据库链接信息持久化
@@ -42,7 +58,7 @@ public class IOUtil {
     public static void write(String content, String fileName) {
         String path = getFilePath(fileName);
         try (FileWriter writer = new FileWriter(path)) {
-            writer.write("[".concat(content).concat("]"));
+            writer.write(content);
             writer.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,7 +73,6 @@ public class IOUtil {
      */
     public static <T> List<T> getList(Type type, String fileName) {
         String path = getFilePath(fileName);
-        System.out.println("path = " + path);
         File file = new File(path);
         if (!file.exists()) {
             try {
@@ -90,7 +105,8 @@ public class IOUtil {
             in.close();
         } catch (IOException ignore) {
         }
-        return new String(fileContent, StandardCharsets.UTF_8);
+        String res = new String(fileContent, StandardCharsets.UTF_8);
+        return res;
     }
 
     private static String getFilePath(String fileName) {

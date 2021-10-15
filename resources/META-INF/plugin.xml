@@ -36,33 +36,45 @@
     </extensions>
 
     <actions>
-        <action id="com.mshcc.plugin.lazycode.window.action.AddConnectionAction"
-                class="com.mshcc.plugin.lazycode.window.action.AddConnectionAction"
+        <action id="com.mshcc.plugin.lazycode.window.action.toolbar.AddConnectionAction"
+                class="com.mshcc.plugin.lazycode.window.action.toolbar.AddConnectionAction"
                 text="数据库连接" description="1.添加数据库连接" icon="/icons/add.png"/>
-        <action id="com.mshcc.plugin.lazycode.window.action.DelConnectionAction"
-                class="com.mshcc.plugin.lazycode.window.action.DelConnectionAction"
+        <action id="com.mshcc.plugin.lazycode.window.action.common.DelConnectionAction"
+                class="com.mshcc.plugin.lazycode.window.action.common.DelConnectionAction"
                 text="移除连接" description="2.移除数据库连接" icon="/icons/delete.png"/>
-        <action id="com.mshcc.plugin.lazycode.window.action.GeneratorAction"
-                class="com.mshcc.plugin.lazycode.window.action.GeneratorAction"
+        <action id="com.mshcc.plugin.lazycode.window.action.toolbar.GeneratorAction"
+                class="com.mshcc.plugin.lazycode.window.action.toolbar.GeneratorAction"
                 text="代码生成" description="3.代码生成" icon="/icons/code.png"/>
-        <action id="com.mshcc.plugin.lazycode.window.action.BatchGeneratorAction"
-                class="com.mshcc.plugin.lazycode.window.action.BatchGeneratorAction"
+        <action id="com.mshcc.plugin.lazycode.window.action.toolbar.BatchGeneratorAction"
+                class="com.mshcc.plugin.lazycode.window.action.toolbar.BatchGeneratorAction"
                 text="批量生成" description="4.批量代码生成" icon="/icons/batchCode.png"/>
-        <action id="com.mshcc.plugin.lazycode.window.action.RefreshAction"
-                class="com.mshcc.plugin.lazycode.window.action.RefreshAction"
+        <action id="com.mshcc.plugin.lazycode.window.action.toolbar.RefreshAction"
+                class="com.mshcc.plugin.lazycode.window.action.toolbar.RefreshAction"
                 text="刷新" description="5.刷新" icon="/icons/refresh.png"/>
-        <action id="com.mshcc.plugin.lazycode.window.action.SettingAction"
-                class="com.mshcc.plugin.lazycode.window.action.SettingAction"
+        <action id="com.mshcc.plugin.lazycode.window.action.toolbar.SettingAction"
+                class="com.mshcc.plugin.lazycode.window.action.toolbar.SettingAction"
                 text="设置" description="6.设置" icon="/icons/setting.png"/>
+        <action id="com.mshcc.plugin.lazycode.window.action.menu.database.ConnectionCloseAction"
+                class="com.mshcc.plugin.lazycode.window.action.menu.database.ConnectionCloseAction" text="关闭连接"
+                description="7.关闭选中的数据库连接" icon="/icons/eye-close.png"/>
+        <action id="com.mshcc.plugin.lazycode.window.action.menu.database.ConnectionEditAction"
+                class="com.mshcc.plugin.lazycode.window.action.menu.database.ConnectionEditAction" text="编辑连接"
+                description="8.修改数据库连接信息" icon="/icons/edit.png"/>
+
         <group id="lazyCodeToolBar">
-            <reference ref="com.mshcc.plugin.lazycode.window.action.AddConnectionAction"/>
-            <reference ref="com.mshcc.plugin.lazycode.window.action.DelConnectionAction"/>
+            <reference ref="com.mshcc.plugin.lazycode.window.action.toolbar.AddConnectionAction"/>
+            <reference ref="com.mshcc.plugin.lazycode.window.action.common.DelConnectionAction"/>
             <separator/>
-            <reference ref="com.mshcc.plugin.lazycode.window.action.GeneratorAction"/>
-            <reference ref="com.mshcc.plugin.lazycode.window.action.BatchGeneratorAction"/>
+            <reference ref="com.mshcc.plugin.lazycode.window.action.toolbar.GeneratorAction"/>
+            <reference ref="com.mshcc.plugin.lazycode.window.action.toolbar.BatchGeneratorAction"/>
             <separator/>
-            <reference ref="com.mshcc.plugin.lazycode.window.action.RefreshAction"/>
-            <reference ref="com.mshcc.plugin.lazycode.window.action.SettingAction"/>
+            <reference ref="com.mshcc.plugin.lazycode.window.action.toolbar.RefreshAction"/>
+            <reference ref="com.mshcc.plugin.lazycode.window.action.toolbar.SettingAction"/>
+        </group>
+        <group id="TreeDatabaseRightClickMenu">
+            <reference ref="com.mshcc.plugin.lazycode.window.action.menu.database.ConnectionCloseAction"/>
+            <reference ref="com.mshcc.plugin.lazycode.window.action.menu.database.ConnectionEditAction"/>
+            <reference ref="com.mshcc.plugin.lazycode.window.action.common.DelConnectionAction"/>
         </group>
     </actions>
 

@@ -49,9 +49,7 @@ public class MySql {
 
 
     public static List<Table> getTables(DatabaseMetaData md, Statement statement, String schemaName) throws SQLException {
-
         ResultSet rs = md.getTables(schemaName, null, "%", new String[]{"TABLE", "VIEW"});
-
         List<Table> tables = new ArrayList<>();
         while (rs.next()) {
             String tableName = rs.getString("TABLE_NAME");

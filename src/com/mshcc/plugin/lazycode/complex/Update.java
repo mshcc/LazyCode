@@ -1,14 +1,18 @@
 package com.mshcc.plugin.lazycode.complex;
 
 import com.mshcc.plugin.lazycode.entity.DbConfig;
+import com.mshcc.plugin.lazycode.entity.Table;
 import com.mshcc.plugin.lazycode.entity.TreeNode;
+import com.mshcc.plugin.lazycode.util.DbUtil;
 import com.mshcc.plugin.lazycode.util.IOUtil;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
-import static com.mshcc.plugin.lazycode.complex.GlobalConstant.DATABASES_CONFIG_LIST;
-import static com.mshcc.plugin.lazycode.complex.GlobalConstant.TREE;
+import java.util.List;
+
+import static com.mshcc.plugin.lazycode.complex.GlobalConstant.*;
 
 /**
  * @Author msh
@@ -29,5 +33,16 @@ public class Update {
         }
         TREE.updateUI();
         treeMode.reload();
+        // 如何还原原先的状态，展开 | 展开但没完全展开
+    }
+
+    public static void expandTreeNode(DefaultMutableTreeNode node, DbConfig dbConfig) {
+        List<Table> tables = DbUtil.getTables(dbConfig);
+        if (tables != null) {
+            for (Table table : tables) {
+                node.add(new DefaultMutableTreeNode(new TreeNode(table.toString(), TREE_TABLE)));
+            }
+            TREE.expandPath(CURRENT_SELECTED_PATH);
+        }
     }
 }

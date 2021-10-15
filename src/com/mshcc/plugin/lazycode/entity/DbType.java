@@ -9,8 +9,8 @@ public enum DbType {
 //    PostgreSQL("PostgreSQL", "org.postgresql.Driver", "jdbc:postgresql://%s:%s/%s"),
 //    SQL_Server("SQL_Server", "com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://%s:%s;databaseName=%s"),
 
-    MySQL("MySQL", "com.mysql.jdbc.Driver", "jdbc:mysql://%s:%s/%s?useUnicode=true&serverTimezone=GMT%2B8"),
-    MySQL_8("MySQL_8", "com.mysql.cj.jdbc.Driver", "jdbc:mysql://%s:%s/%s?useUnicode=true&serverTimezone=GMT%2B8"),
+    MySQL("MySQL", "com.mysql.jdbc.Driver", "jdbc:mysql://%s:%s/%s?useUnicode=true&&useSSL=%s"),
+    MySQL_8("MySQL_8", "com.mysql.cj.jdbc.Driver", "jdbc:mysql://%s:%s/%s?useUnicode=true&&useSSL=%s"),
     Oracle("Oracle", "oracle.jdbc.OracleDriver", "jdbc:oracle:thin:@//%s:%s/%s");
 
     private final String driverClass;

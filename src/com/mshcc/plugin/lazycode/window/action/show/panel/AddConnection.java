@@ -13,11 +13,11 @@ import java.awt.event.ActionListener;
 /**
  * @author mshcc
  * @date 2021/9/30 10:26
- * @description 新增链接展示窗口
+ * @Description 新增链接展示窗口
  */
 public class AddConnection extends JDialog {
 
-    public static final AddConnection CONNECTION_PANEL = new AddConnection();
+    public static final AddConnection ADD_CONNECTION_PANEL = new AddConnection();
 
     private JPanel panel;
     private JTextField connName;
@@ -33,7 +33,7 @@ public class AddConnection extends JDialog {
         dbType.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (DbType.Oracle.equals(dbType.getItem().toString())) {
+                if (DbType.Oracle.equals(dbType.getSelectedItem().toString())) {
                     schemaName.setText("服务名");
                 } else {
                     schemaName.setText("数据库");
@@ -43,49 +43,59 @@ public class AddConnection extends JDialog {
     }
 
     public static JComponent getPanel() {
-        return CONNECTION_PANEL.panel;
+        return ADD_CONNECTION_PANEL.panel;
     }
 
     public static DbConfig getDbConfig(boolean testConn) {
         if (checkParams(testConn)) {
             return new DbConfig.Builder()
-                    .connName(CONNECTION_PANEL.connName.getText())
-                    .dbType(CONNECTION_PANEL.dbType.getItem().toString())
-                    .host(CONNECTION_PANEL.host.getText())
-                    .password(new String(CONNECTION_PANEL.password.getPassword()))
-                    .port(CONNECTION_PANEL.port.getText())
-                    .username(CONNECTION_PANEL.username.getText())
-                    .schema(CONNECTION_PANEL.schema.getText())
+                    .connName(ADD_CONNECTION_PANEL.connName.getText())
+                    .dbType(ADD_CONNECTION_PANEL.dbType.getSelectedItem().toString())
+                    .host(ADD_CONNECTION_PANEL.host.getText())
+                    .password(new String(ADD_CONNECTION_PANEL.password.getPassword()))
+                    .port(ADD_CONNECTION_PANEL.port.getText())
+                    .username(ADD_CONNECTION_PANEL.username.getText())
+                    .schema(ADD_CONNECTION_PANEL.schema.getText())
                     .build();
         }
         return null;
     }
 
     private static boolean checkParams(boolean testConn) {
-        System.out.println(CONNECTION_PANEL.toString());
-        if (!testConn && CheckUtil.isNull(CONNECTION_PANEL.connName)) {
+        System.out.println(ADD_CONNECTION_PANEL.toString());
+        if (!testConn && CheckUtil.isNull(ADD_CONNECTION_PANEL.connName)) {
             DialogUtil.showMsg("连接名称不能为空");
             return false;
         }
-        if (CheckUtil.isNull(CONNECTION_PANEL.host)) {
+        if (CheckUtil.isNull(ADD_CONNECTION_PANEL.host)) {
             DialogUtil.showMsg("ip地址不能为空");
             return false;
         }
-        if (CheckUtil.isNull(CONNECTION_PANEL.port)) {
+        if (CheckUtil.isNull(ADD_CONNECTION_PANEL.port)) {
             DialogUtil.showMsg("端口号不能为空");
             return false;
         }
-        if (CheckUtil.isNull(CONNECTION_PANEL.username)) {
+        if (CheckUtil.isNull(ADD_CONNECTION_PANEL.username)) {
             DialogUtil.showMsg("用户名不能为空");
         }
-        if (CheckUtil.isNull(CONNECTION_PANEL.password)) {
+        if (CheckUtil.isNull(ADD_CONNECTION_PANEL.password)) {
             DialogUtil.showMsg("密码不能为空");
         }
-        if (CheckUtil.isNull(CONNECTION_PANEL.schema)) {
-            DialogUtil.showMsg(CONNECTION_PANEL.schemaName.getText().concat("不能为空"));
+        if (CheckUtil.isNull(ADD_CONNECTION_PANEL.schema)) {
+            DialogUtil.showMsg(ADD_CONNECTION_PANEL.schemaName.getText().concat("不能为空"));
             return false;
         }
         return true;
+    }
+
+    public static void clear() {
+        ADD_CONNECTION_PANEL.connName.setText("");
+        ADD_CONNECTION_PANEL.dbType.setSelectedIndex(0);
+        ADD_CONNECTION_PANEL.host.setText("");
+        ADD_CONNECTION_PANEL.password.setText("");
+        ADD_CONNECTION_PANEL.port.setText("");
+        ADD_CONNECTION_PANEL.username.setText("");
+        ADD_CONNECTION_PANEL.schema.setText("");
     }
 
     @Override
@@ -97,7 +107,7 @@ public class AddConnection extends JDialog {
                 ", username=" + username.getText() +
                 ", port=" + port.getText() +
                 ", host=" + host.getText() +
-                ", dbType=" + dbType.getItem() +
+                ", dbType=" + dbType.getSelectedItem() +
                 ", schemaName=" + schemaName.getText() +
                 '}';
     }

@@ -1,6 +1,7 @@
 package com.mshcc.plugin.lazycode.window.component;
 
-import com.mshcc.plugin.lazycode.complex.GlobalConstant;
+import static com.mshcc.plugin.lazycode.complex.GlobalConstant.*;
+
 import com.mshcc.plugin.lazycode.entity.TreeNode;
 import sun.swing.DefaultLookup;
 
@@ -43,12 +44,12 @@ public class LazyCodeCellRenderer extends DefaultTreeCellRenderer {
 
         setForeground(fg);
         if (node != null) {
-            if (node.type.equals(GlobalConstant.TREE_DATABASE)) {
+            if (node.type.equals(TREE_DATABASE)) {
                 URL url = this.getClass().getResource("/icons/database.png");
                 assert url != null : "database Icon not exist";
                 Icon icon = new ImageIcon(url);
                 super.setIcon(icon);
-            } else if (node.type.equals(GlobalConstant.TREE_TABLE)) {
+            } else if (node.type.equals(TREE_TABLE)) {
                 URL url = this.getClass().getResource("/icons/table.png");
                 assert url != null : "table Icon not exist";
                 Icon icon = new ImageIcon(url);

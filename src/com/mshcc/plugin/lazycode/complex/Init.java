@@ -1,6 +1,5 @@
 package com.mshcc.plugin.lazycode.complex;
 
-import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.project.Project;
@@ -10,6 +9,7 @@ import com.mshcc.plugin.lazycode.entity.TreeNode;
 import com.mshcc.plugin.lazycode.window.component.LazyCodeCellRenderer;
 import com.mshcc.plugin.lazycode.window.component.MySimpleTree;
 import com.mshcc.plugin.lazycode.window.component.listener.tree.MyTreeExpansionListener;
+import com.mshcc.plugin.lazycode.window.component.listener.tree.MyTreeMouseListener;
 import com.mshcc.plugin.lazycode.window.component.listener.tree.MyTreeSelectionListener;
 import com.mshcc.plugin.lazycode.window.dialog.DialogUtil;
 
@@ -26,6 +26,27 @@ import static com.mshcc.plugin.lazycode.complex.GlobalConstant.*;
  * @Description 插件的初始化方法
  */
 public class Init {
+
+    /**
+     * 树节点鼠标监听事件
+     */
+    public static final MyTreeMouseListener TREE_MOUSE_LISTENER = new MyTreeMouseListener();
+
+    /**
+     * 树节点展开事件
+     */
+    public static final MyTreeExpansionListener TREE_EXPANSION_LISTENER = new MyTreeExpansionListener();
+
+    /**
+     * 树节点选择事件
+     */
+    public static final MyTreeSelectionListener TREE_SELECTION_LISTENER = new MyTreeSelectionListener();
+
+    /**
+     * 树形视图渲染器
+     */
+    public static final LazyCodeCellRenderer LAZY_CODE_CELL_RENDERER = new LazyCodeCellRenderer();
+
     /**
      * 仅在插件初始化时调用一次，目的是获取当前打开项目
      *
@@ -34,7 +55,7 @@ public class Init {
     public static void initProject(Project project) {
         PROJECT = project;
         PROJECT_PATH = project.getBasePath();
-        if(PROJECT==null||PROJECT_PATH==null){
+        if (PROJECT == null || PROJECT_PATH == null) {
             DialogUtil.showMsg("插件初始化失败");
         }
         assert PROJECT_PATH != null : "插件初始化失败";
@@ -47,22 +68,22 @@ public class Init {
     public static void initTree() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(new TreeNode("root"));
         TREE = new MySimpleTree(new DefaultTreeModel(root));
-        TREE.setCellRenderer(new LazyCodeCellRenderer());
+        TREE.setCellRenderer(LAZY_CODE_CELL_RENDERER);
         TREE.getEmptyText().clear();
         TREE.setOpaque(true);
         TREE.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         TREE.setRootVisible(false);
-        TREE.addTreeExpansionListener(new MyTreeExpansionListener());
-        TREE.addTreeSelectionListener(new MyTreeSelectionListener());
+        TREE.addTreeExpansionListener(TREE_EXPANSION_LISTENER);
+        TREE.addTreeSelectionListener(TREE_SELECTION_LISTENER);
+        TREE.addMouseListener(TREE_MOUSE_LISTENER);
     }
 
     /**
      * 初始化插件的工具栏
      */
     public static JComponent initToolBar() {
-        ActionManager actionManager = ActionManager.getInstance();
-        ActionToolbar actionToolbar = actionManager.createActionToolbar("lazyCodeToolBar",
-                (DefaultActionGroup) actionManager.getAction("lazyCodeToolBar"), false);
+        ActionToolbar actionToolbar = ACTION_MANAGER.createActionToolbar("lazyCodeToolBar",
+                (DefaultActionGroup) ACTION_MANAGER.getAction("lazyCodeToolBar"), false);
         actionToolbar.setTargetComponent(TREE);
         return actionToolbar.getComponent();
     }

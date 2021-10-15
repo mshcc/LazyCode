@@ -5,7 +5,7 @@ import com.mshcc.plugin.lazycode.complex.Update;
 import com.mshcc.plugin.lazycode.entity.DbConfig;
 import com.mshcc.plugin.lazycode.util.DbUtil;
 import com.mshcc.plugin.lazycode.util.IOUtil;
-import com.mshcc.plugin.lazycode.window.action.show.panel.AddConnection;
+import com.mshcc.plugin.lazycode.window.action.show.panel.EditConnection;
 import com.mshcc.plugin.lazycode.window.dialog.DialogUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,25 +14,29 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 import static com.mshcc.plugin.lazycode.complex.GlobalConstant.DATABASES_CONFIG_LIST;
-import static com.mshcc.plugin.lazycode.complex.GlobalConstant.TREE;
 
 /**
  * @author mshcc
  * @Date 2021/9/29 17:17
  * @Description 新增链接窗口展示
  */
-public class AddConnectionShow extends DialogWrapper {
-    protected AddConnectionShow() {
+public class EditConnectionShow extends DialogWrapper {
+
+    private DbConfig config;
+
+    protected EditConnectionShow(DbConfig config) {
         super(true);
         setResizable(false);
+        this.config = config;
         init();
-        setTitle("新增连接");
+        setTitle("编辑连接");
     }
 
     @Nullable
     @Override
     protected JComponent createCenterPanel() {
-        return AddConnection.getPanel();
+        EditConnection.setDbConfig(config);
+        return EditConnection.getPanel();
     }
 
     @NotNull
@@ -44,33 +48,32 @@ public class AddConnectionShow extends DialogWrapper {
         return new Action[]{testAction, saveAction};
     }
 
-    public static void initPanel() {
-        new AddConnectionShow().showAndGet();
+    public static void initPanel(DbConfig config) {
+        new EditConnectionShow(config).showAndGet();
     }
 
     class SaveAction extends DialogWrapperAction {
 
         protected SaveAction() {
-            super("保存连接");
+            super("保存修改");
         }
 
         @Override
         protected void doAction(ActionEvent actionEvent) {
-            DbConfig dbConfig = AddConnection.getDbConfig(false);
+            DbConfig dbConfig = EditConnection.getDbConfig(false);
             if (dbConfig != null) {
-                for (DbConfig config : DATABASES_CONFIG_LIST) {
-                    if (config.getConnName().equals(dbConfig.getConnName())) {
-                        DialogUtil.showMsg("连接名称重复，请修改");
-                        return;
-                    }
-                    if (config.getHost().equals(dbConfig.getHost()) && config.getPort().equals(dbConfig.getPort())
-                            && config.getUsername().equals(dbConfig.getUsername()) && config.getSchema().equals(dbConfig.getSchema())) {
+                for (DbConfig c : DATABASES_CONFIG_LIST) {
+                    if (c != config
+                            && c.getHost().equals(dbConfig.getHost())
+                            && c.getPort().equals(dbConfig.getPort())
+                            && c.getUsername().equals(dbConfig.getUsername())
+                            && c.getSchema().equals(dbConfig.getSchema())) {
                         DialogUtil.showMsg("连接已存在，连接名为：".concat(config.getConnName()));
                         close(CANCEL_EXIT_CODE);
                         return;
                     }
                 }
-                AddConnection.clear();
+                DATABASES_CONFIG_LIST.remove(config);
                 DATABASES_CONFIG_LIST.add(dbConfig);
                 IOUtil.writeDatabaseConfigList();
                 Update.updateTreeView();
@@ -87,7 +90,7 @@ public class AddConnectionShow extends DialogWrapper {
 
         @Override
         protected void doAction(ActionEvent actionEvent) {
-            DbConfig dbConfig = AddConnection.getDbConfig(true);
+            DbConfig dbConfig = EditConnection.getDbConfig(true);
             if (dbConfig != null) {
                 DialogUtil.showMsg(DbUtil.checkConnection(dbConfig) ? "连接成功" : "连接失败");
             }
