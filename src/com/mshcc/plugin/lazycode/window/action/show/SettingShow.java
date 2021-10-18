@@ -24,7 +24,8 @@ public class SettingShow extends DialogWrapper {
     @Nullable
     @Override
     protected JComponent createCenterPanel() {
-        return new Setting().getComponent();
+        Setting.init();
+        return Setting.SETTING.getComponent();
     }
 
     public static void initPanel() {

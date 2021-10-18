@@ -33,6 +33,10 @@
                     secondary="true"
                     factoryClass="com.mshcc.plugin.lazycode.LazyCodeWindow"
         />
+        <applicationService
+                serviceImplementation="com.mshcc.plugin.lazycode.complex.SettingState"/>
+        <projectService
+                serviceImplementation="com.mshcc.plugin.lazycode.complex.SettingState"/>
     </extensions>
 
     <actions>

@@ -1,6 +1,14 @@
 package com.mshcc.plugin.lazycode.window.action.show.panel;
 
+import com.mshcc.plugin.lazycode.complex.SettingState;
+import com.mshcc.plugin.lazycode.complex.custom.Field;
+import com.mshcc.plugin.lazycode.complex.custom.Template;
+import com.mshcc.plugin.lazycode.entity.SettingConfig;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * @Author: mshcc
@@ -8,13 +16,21 @@ import javax.swing.*;
  * @Description:
  */
 public class Setting {
-    private JPanel panel;
-    private JButton 自定义字段Button;
-    private JButton 自定义模板Button;
-    private JTextArea 自定义字段中设置模板中可插入的值模板只支持FreeMarker模板语言请自行学习TextArea;
 
-    public JComponent getComponent(){
-        return panel;
+    public static final Setting SETTING = new Setting();
+
+    private JPanel panel;
+    private JButton customField;
+    private JButton customTemplate;
+    private JTextArea text;
+
+    public JComponent getComponent() {
+        return SETTING.panel;
+    }
+
+    public static void init() {
+        SETTING.customField.addActionListener(actionEvent -> {
+        });
     }
 
 }
