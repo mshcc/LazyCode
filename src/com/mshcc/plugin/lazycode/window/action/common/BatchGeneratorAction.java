@@ -1,9 +1,11 @@
-package com.mshcc.plugin.lazycode.window.action.toolbar;
+package com.mshcc.plugin.lazycode.window.action.common;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.mshcc.plugin.lazycode.window.action.show.BatchGeneratorShow;
 import org.jetbrains.annotations.NotNull;
+
+import static com.mshcc.plugin.lazycode.complex.GlobalConstant.CURRENT_SELECTED_DATABASE;
 
 /**
  * @author mshcc
@@ -14,5 +16,10 @@ public class BatchGeneratorAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         BatchGeneratorShow.initPanel();
+    }
+
+    @Override
+    public void update(@NotNull AnActionEvent e) {
+        e.getPresentation().setEnabled(CURRENT_SELECTED_DATABASE != null);
     }
 }

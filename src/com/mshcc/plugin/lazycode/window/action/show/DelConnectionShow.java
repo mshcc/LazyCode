@@ -9,7 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-import static com.mshcc.plugin.lazycode.complex.GlobalConstant.*;
+import static com.mshcc.plugin.lazycode.complex.GlobalConstant.CURRENT_SELECTED_DATABASE;
+
 /**
  * @author mshcc
  * @Date 2021/9/29 17:18
@@ -44,10 +45,11 @@ public class DelConnectionShow extends DialogWrapper {
         return new Action[]{new ConfirmAction(), exitAction};
     }
 
-    class ExitAction extends DialogWrapperExitAction{
+    class ExitAction extends DialogWrapperExitAction {
         public ExitAction(String name, int exitCode) {
             super(name, exitCode);
         }
+
         @Override
         protected void doAction(ActionEvent e) {
             super.doAction(e);
@@ -58,6 +60,7 @@ public class DelConnectionShow extends DialogWrapper {
         protected ConfirmAction() {
             super("确定");
         }
+
         @Override
         protected void doAction(ActionEvent actionEvent) {
             DelConnectionAction.DO_DELETE = true;

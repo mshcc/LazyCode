@@ -14,7 +14,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 import static com.mshcc.plugin.lazycode.complex.GlobalConstant.DATABASES_CONFIG_LIST;
-import static com.mshcc.plugin.lazycode.complex.GlobalConstant.TREE;
 
 /**
  * @author mshcc

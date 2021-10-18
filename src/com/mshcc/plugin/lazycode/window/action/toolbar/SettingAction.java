@@ -4,6 +4,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.mshcc.plugin.lazycode.window.action.show.SettingShow;
 import org.jetbrains.annotations.NotNull;
+
 /**
  * @author mshcc
  * @date 2021/9/29 17:15

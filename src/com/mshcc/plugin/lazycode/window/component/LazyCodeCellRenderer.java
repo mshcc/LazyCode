@@ -1,7 +1,5 @@
 package com.mshcc.plugin.lazycode.window.component;
 
-import static com.mshcc.plugin.lazycode.complex.GlobalConstant.*;
-
 import com.mshcc.plugin.lazycode.entity.TreeNode;
 import sun.swing.DefaultLookup;
 
@@ -10,6 +8,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
 import java.net.URL;
+
+import static com.mshcc.plugin.lazycode.complex.GlobalConstant.TREE_DATABASE;
+import static com.mshcc.plugin.lazycode.complex.GlobalConstant.TREE_TABLE;
 
 /**
  * @Author msh

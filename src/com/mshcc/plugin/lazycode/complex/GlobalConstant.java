@@ -1,14 +1,15 @@
 package com.mshcc.plugin.lazycode.complex;
 
 import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.treeStructure.SimpleTree;
 import com.mshcc.plugin.lazycode.entity.DbConfig;
+import com.mshcc.plugin.lazycode.entity.SettingConfig;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,14 +62,6 @@ public class GlobalConstant {
 
     public static TreePath CURRENT_SELECTED_PATH;
     public static DefaultMutableTreeNode CURRENT_SELECTED_NODE;
-    /**
-     * 展开的节点
-     */
-    public static List<String> EXPAND_PATH_LIST = new ArrayList<>();
-    /**
-     * 展开但没完全展开的节点
-     */
-    public static List<String> COLLAPSE_PATH_LIST = new ArrayList<>();
 
     /**
      * 数据库列表
@@ -91,4 +84,15 @@ public class GlobalConstant {
      * 用于创建工具栏 || 右键菜单
      */
     public static final ActionManager ACTION_MANAGER = ActionManager.getInstance();
+
+    /**
+     * 文件选择器
+     */
+    public static final FileChooserDescriptor FILE_CHOOSER_DESCRIPTOR = new FileChooserDescriptor(true, true, true, true, true, true);
+
+
+    /**
+     * 持久化的代码生产策略
+     */
+    public static SettingConfig SETTING_CONFIG;
 }

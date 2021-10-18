@@ -7,7 +7,6 @@ import com.mshcc.plugin.lazycode.window.action.show.DelConnectionShow;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.MutableTreeNode;
 
 import static com.mshcc.plugin.lazycode.complex.GlobalConstant.*;
 

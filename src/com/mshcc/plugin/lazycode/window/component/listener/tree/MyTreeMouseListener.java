@@ -28,6 +28,7 @@ public class MyTreeMouseListener extends MouseAdapter {
             TreeNode clicked = (TreeNode) node.getUserObject();
             switch (clicked.type) {
                 case TREE_DATABASE:
+                    CURRENT_SELECTED_TABLE = null;
                     /* 设置当前选中的数据库 */
                     for (DbConfig dbConfig : DATABASES_CONFIG_LIST) {
                         if (dbConfig.getConnName().equals(clicked.name)) {
@@ -39,10 +40,10 @@ public class MyTreeMouseListener extends MouseAdapter {
                         /*左键*/
                         case MouseEvent.BUTTON1:
                             /* 双击未展开节点 */
-                            if (e.getClickCount() == DOUBLE_CLICK ) {
-                                if(node.getChildCount() == 0){
+                            if (e.getClickCount() == DOUBLE_CLICK) {
+                                if (node.getChildCount() == 0) {
                                     // 展开数据库的节点
-                                    Update.expandTreeNode(node,CURRENT_SELECTED_DATABASE);
+                                    Update.expandTreeNode(node, CURRENT_SELECTED_DATABASE);
                                 }
                             }
                             break;
@@ -63,7 +64,14 @@ public class MyTreeMouseListener extends MouseAdapter {
                     }
                     break;
                 case TREE_TABLE:
-
+                    int index = clicked.name.lastIndexOf("     \t[");
+                    CURRENT_SELECTED_TABLE = index == -1 ? clicked.name : clicked.name.substring(0, index);
+                    if (e.getButton() == MouseEvent.BUTTON3) {
+                        ActionGroup actionGroup = (ActionGroup) ACTION_MANAGER.getAction("TreeTableRightClickMenu");
+                        if (actionGroup != null) {
+                            ACTION_MANAGER.createActionPopupMenu("", actionGroup).getComponent().show(e.getComponent(), e.getX(), e.getY());
+                        }
+                    }
                     break;
                 default:
                     break;

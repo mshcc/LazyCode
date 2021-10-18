@@ -8,8 +8,6 @@ import com.mshcc.plugin.lazycode.util.IOUtil;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
-
 import java.util.List;
 
 import static com.mshcc.plugin.lazycode.complex.GlobalConstant.*;

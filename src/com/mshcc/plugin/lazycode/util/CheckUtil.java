@@ -1,5 +1,7 @@
 package com.mshcc.plugin.lazycode.util;
 
+import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+
 import javax.swing.*;
 
 /**
@@ -17,5 +19,9 @@ public class CheckUtil {
 
     public static boolean notNull(JTextField field) {
         return !isNull(field);
+    }
+
+    public static boolean isNull(TextFieldWithBrowseButton field) {
+        return "".equals(field.getText());
     }
 }

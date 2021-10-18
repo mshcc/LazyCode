@@ -59,9 +59,9 @@ public class DbUtil {
     public static String getConnectionUrl(DbConfig config) {
         DbType dbType = DbType.valueOf(config.getDbType());
         String url = dbType.getConnectionUrlPattern();
-        if (dbType.equals(DbType.MySQL) || dbType.equals(DbType.MySQL_8) ) {
-            return url = String.format(url, config.getHost(), config.getPort(), config.getSchema(),"false");
-        }else if(dbType.equals(DbType.Oracle)){
+        if (dbType.equals(DbType.MySQL) || dbType.equals(DbType.MySQL_8)) {
+            return url = String.format(url, config.getHost(), config.getPort(), config.getSchema(), "false");
+        } else if (dbType.equals(DbType.Oracle)) {
             return String.format(url, config.getHost(), config.getPort(), config.getSchema());
         }
         return "";

@@ -21,7 +21,7 @@ public class SettingShow extends DialogWrapper {
         return null;
     }
 
-    public static void initPanel(){
+    public static void initPanel() {
         new SettingShow().showAndGet();
     }
 }

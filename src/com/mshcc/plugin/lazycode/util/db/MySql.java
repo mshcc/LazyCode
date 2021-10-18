@@ -1,9 +1,9 @@
 package com.mshcc.plugin.lazycode.util.db;
 
 
-
 import com.mshcc.plugin.lazycode.entity.Field;
 import com.mshcc.plugin.lazycode.entity.Table;
+
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
