@@ -3,7 +3,6 @@ package com.mshcc.plugin.lazycode.window.action.show.panel;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.mshcc.plugin.lazycode.entity.GeneratorConfig;
 import com.mshcc.plugin.lazycode.util.CheckUtil;
-import com.mshcc.plugin.lazycode.util.StringUtil;
 import com.mshcc.plugin.lazycode.window.component.listener.browse.DefaultTextBrowseFolderListener;
 import com.mshcc.plugin.lazycode.window.dialog.DialogUtil;
 
@@ -22,7 +21,7 @@ public class Generator {
 
     private JTextField table;
     private TextFieldWithBrowseButton codeDir;
-    private JPanel generatorPanel;
+    private JPanel panel;
 
     public Generator() {
         codeDir.addBrowseFolderListener(new DefaultTextBrowseFolderListener(FILE_CHOOSER_DESCRIPTOR, PROJECT));
@@ -39,7 +38,7 @@ public class Generator {
     }
 
     public static JComponent getGeneratorPanel() {
-        return GENERATOR.generatorPanel;
+        return GENERATOR.panel;
     }
 
     /**

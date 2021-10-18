@@ -1,6 +1,8 @@
 package com.mshcc.plugin.lazycode.window.action.show;
 
 import com.intellij.openapi.ui.DialogWrapper;
+import com.mshcc.plugin.lazycode.window.action.show.panel.Setting;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -13,15 +15,26 @@ import javax.swing.*;
 public class SettingShow extends DialogWrapper {
     protected SettingShow() {
         super(true);
+        // 固定窗口大小
+        setResizable(false);
+        init();
+        setTitle("设置");
     }
 
     @Nullable
     @Override
     protected JComponent createCenterPanel() {
-        return null;
+        return new Setting().getComponent();
     }
 
     public static void initPanel() {
         new SettingShow().showAndGet();
     }
+
+    @NotNull
+    @Override
+    protected Action[] createActions() {
+        return new Action[]{};
+    }
+
 }
