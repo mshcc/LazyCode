@@ -4,8 +4,12 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.TextBrowseFolderListener;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.table.JBTable;
+import com.mshcc.plugin.lazycode.window.component.MyTableModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import javax.swing.table.TableModel;
 
 /**
  * @Author: mshcc
@@ -30,6 +34,18 @@ public class DefaultTextBrowseFolderListener extends TextBrowseFolderListener {
         this.type = type;
     }
 
+    private JBTable table;
+    private Integer row;
+    private Integer col;
+
+    public DefaultTextBrowseFolderListener(@NotNull FileChooserDescriptor fileChooserDescriptor, @Nullable Project project, JBTable table, int row, int col) {
+        super(fileChooserDescriptor, project);
+        this.type = type;
+        this.table = table;
+        this.row = row;
+        this.col = col;
+    }
+
     @Override
     protected void onFileChosen(@NotNull VirtualFile chosenFile) {
         if (chosenFile == null) {
@@ -45,5 +61,10 @@ public class DefaultTextBrowseFolderListener extends TextBrowseFolderListener {
             }
         }
         this.myAccessor.setText(this.myTextComponent, dir);
+        if (table != null) {
+
+            MyTableModel model = (MyTableModel) table.getModel();
+            model.setValueAt(dir, row, col);
+        }
     }
 }

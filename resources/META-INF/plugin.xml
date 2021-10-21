@@ -33,6 +33,7 @@
                     secondary="true"
                     factoryClass="com.mshcc.plugin.lazycode.LazyCodeWindow"
         />
+        <applicationConfigurable id="lazycode.id" displayName="Lazy Code" groupId="tools" instance="com.mshcc.plugin.lazycode.window.SettingConfigComponent"/>
         <applicationService
                 serviceImplementation="com.mshcc.plugin.lazycode.complex.SettingState"/>
         <projectService

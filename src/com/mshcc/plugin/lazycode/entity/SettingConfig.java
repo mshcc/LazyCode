@@ -13,4 +13,12 @@ import java.util.List;
 public class SettingConfig {
     public List<Field> fields;
     public List<Template> templates;
+
+    @Override
+    public String toString() {
+        return "SettingConfig{" +
+                "fields=" + fields +
+                ", templates=" + templates +
+                '}';
+    }
 }

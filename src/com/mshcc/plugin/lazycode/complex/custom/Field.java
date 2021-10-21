@@ -9,15 +9,22 @@ public class Field {
     public String name;
     public String value;
     public Boolean enabled;
-    public Boolean editable;
 
     public Field() {
     }
 
-    public Field(String name, String value, Boolean enabled, Boolean editable) {
+    public Field(String name, String value, Boolean enabled) {
         this.name = name;
         this.value = value;
         this.enabled = enabled;
-        this.editable = editable;
+    }
+
+    @Override
+    public String toString() {
+        return "Field{" +
+                "name='" + name + '\'' +
+                ", value='" + value + '\'' +
+                ", enabled=" + enabled +
+                '}';
     }
 }

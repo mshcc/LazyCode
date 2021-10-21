@@ -9,15 +9,22 @@ public class Template {
     public String name;
     public String path;
     public Boolean enabled;
-    public Boolean editable;
+
+    @Override
+    public String toString() {
+        return "Template{" +
+                "name='" + name + '\'' +
+                ", path='" + path + '\'' +
+                ", enabled=" + enabled +
+                '}';
+    }
 
     public Template() {
     }
 
-    public Template(String name, String path, Boolean enabled, Boolean editable) {
+    public Template(String name, String path, Boolean enabled) {
         this.name = name;
         this.path = path;
         this.enabled = enabled;
-        this.editable = editable;
     }
 }

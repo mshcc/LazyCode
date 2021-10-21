@@ -2,7 +2,7 @@ package com.mshcc.plugin.lazycode.window.action.toolbar;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.mshcc.plugin.lazycode.window.action.show.SettingShow;
+import com.intellij.openapi.options.ShowSettingsUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class SettingAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
-        SettingShow.initPanel();
+        ShowSettingsUtil.getInstance().showSettingsDialog(anActionEvent.getProject(),"Lazy Code");
     }
+
 }
