@@ -55,7 +55,6 @@ public class SettingConfigComponent implements SearchableConfigurable {
 
     @Override
     public void apply() throws ConfigurationException {
-        System.out.println("保存配置");
         SettingState.getInstance().loadState(Setting.SETTING.getConfig());
     }
 

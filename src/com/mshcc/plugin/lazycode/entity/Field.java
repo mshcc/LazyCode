@@ -10,14 +10,8 @@ public class Field {
     private String fieldNameInDb;
     private String remark;
     private String notNull;
-    // "YES"  ||  "NO"   ||  ""
     private String autoincrement;
-    private Integer maxSize;
-    private boolean tableId;
-    private boolean pattern;
-    private String name;
     private boolean primaryKey;
-    private boolean flag = false;
 
     public boolean isPrimaryKey() {
         return primaryKey;
@@ -27,46 +21,6 @@ public class Field {
         this.primaryKey = primaryKey;
     }
 
-
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isPattern() {
-        return pattern;
-    }
-
-    public void setPattern(boolean pattern) {
-        this.pattern = pattern;
-    }
-
-    public Integer getMaxSize() {
-        return maxSize;
-    }
-
-    public void setMaxSize(Integer maxSize) {
-        this.maxSize = maxSize;
-    }
-
-    public boolean isTableId() {
-        return tableId;
-    }
-
-    public void setTableId(boolean tableId) {
-        this.tableId = tableId;
-    }
 
     public String getAutoincrement() {
         return autoincrement;
@@ -136,12 +90,7 @@ public class Field {
                 ", fieldNameInDb='" + fieldNameInDb + '\'' +
                 ", remark='" + remark + '\'' +
                 ", notNull='" + notNull + '\'' +
-                ", autoincrement='" + autoincrement + '\'' +
-                ", maxSize=" + maxSize +
-                ", tableId=" + tableId +
-                ", pattern=" + pattern +
-                ", name='" + name + '\'' +
-                ", flag=" + flag +
+                ", autoincrement='" + autoincrement +
                 '}';
     }
 }

@@ -140,7 +140,6 @@
                   <model>
                     <item value="MySQL"/>
                     <item value="MySQL_8"/>
-                    <item value="Oracle"/>
                   </model>
                 </properties>
               </component>

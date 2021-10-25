@@ -8,7 +8,6 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.List;
 
 /**
  * @author mshcc
@@ -16,6 +15,7 @@ import java.util.List;
 public class MyTableModel extends AbstractTableModel {
     List<List<Object>> params = new ArrayList<>();
     String[] titles;
+    public Integer inlineTemplate = 0;
 
     public MyTableModel(String[] titles) {
         this.titles = titles;
@@ -54,7 +54,8 @@ public class MyTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return (boolean) getValueAt(rowIndex, 0) || columnIndex == 0;
+        /*当选中为false或者对象为内置模板时，不允许编辑*/
+        return (((boolean) getValueAt(rowIndex, 0)) && rowIndex >= inlineTemplate) || columnIndex == 0;
     }
 
     @Override
@@ -99,7 +100,7 @@ public class MyTableModel extends AbstractTableModel {
     }
 
     public void removeRow(int rowIndex) {
-        if (rowIndex > params.size()) {
+        if (rowIndex > params.size() || rowIndex < inlineTemplate) {
             return;
         }
         params.remove(rowIndex);

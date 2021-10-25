@@ -9,8 +9,6 @@ import com.mshcc.plugin.lazycode.window.component.MyCeilEditor;
 import com.mshcc.plugin.lazycode.window.component.MyTableModel;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -52,7 +50,14 @@ public class Setting {
         TEMPLATE_MODEL.clear();
         FIELDS_MODEL.clear();
         TEMPLATE_MODEL.addRowList(config.templates);
+        TEMPLATE_MODEL.inlineTemplate = SettingState.templates.size();
         FIELDS_MODEL.addRowList(config.fields);
+        FIELDS_MODEL.inlineTemplate = SettingState.fields.size();
+
+        template.getTableHeader().setReorderingAllowed(false);
+        template.getTableHeader().setResizingAllowed(false);
+        fields.getTableHeader().setReorderingAllowed(false);
+        fields.getTableHeader().setResizingAllowed(false);
     }
 
     /**
@@ -96,9 +101,25 @@ public class Setting {
     }
 
     public void init() {
-        addT.addActionListener(actionEvent -> TEMPLATE_MODEL.addRow(new Object[]{true, "", ""}));
-        addF.addActionListener(actionEvent -> FIELDS_MODEL.addRow(new Object[]{true, "", ""}));
-        removeF.addActionListener(actionEvent -> FIELDS_MODEL.removeRow(fields.getSelectedRow()));
-        removeT.addActionListener(actionEvent -> TEMPLATE_MODEL.removeRow(template.getSelectedRow()));
+        addT.addActionListener(actionEvent -> {
+            TEMPLATE_MODEL.addRow(new Object[]{true, "", ""});
+            int row = TEMPLATE_MODEL.getRowCount() - 1;
+            TEMPLATE_MODEL.fireTableRowsInserted(row, row);
+        });
+        addF.addActionListener(actionEvent -> {
+            FIELDS_MODEL.addRow(new Object[]{true, "", ""});
+            int row = FIELDS_MODEL.getRowCount() - 1;
+            FIELDS_MODEL.fireTableRowsInserted(row, row);
+        });
+        removeF.addActionListener(actionEvent -> {
+            int row = fields.getSelectedRow();
+            FIELDS_MODEL.removeRow(row);
+            FIELDS_MODEL.fireTableRowsDeleted(row, row);
+        });
+        removeT.addActionListener(actionEvent -> {
+            int row = template.getSelectedRow();
+            TEMPLATE_MODEL.removeRow(row);
+            TEMPLATE_MODEL.fireTableRowsDeleted(row, row);
+        });
     }
 }

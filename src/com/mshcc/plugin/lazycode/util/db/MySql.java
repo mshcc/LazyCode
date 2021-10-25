@@ -3,6 +3,7 @@ package com.mshcc.plugin.lazycode.util.db;
 
 import com.mshcc.plugin.lazycode.entity.Field;
 import com.mshcc.plugin.lazycode.entity.Table;
+import com.mshcc.plugin.lazycode.util.StringUtil;
 
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -21,26 +22,55 @@ public class MySql {
         ResultSet rs = metaData.getColumns(schema, null, tableName, null);
         List<Field> columns = new ArrayList<>();
         while (rs.next()) {
-            System.out.println("rs.getString(\"TABLE_CAT\") = " + rs.getString("TABLE_CAT"));
-            System.out.println("rs.getString(\"TABLE_SCHEM\") = " + rs.getString("TABLE_SCHEM"));
-            System.out.println("rs.getString(\"TABLE_NAME\") = " + rs.getString("TABLE_NAME"));
-            System.out.println("rs.getString(\"COLUMN_NAME\") = " + rs.getString("COLUMN_NAME"));
-            System.out.println("rs.getString(\"DATA_TYPE\") = " + rs.getString("DATA_TYPE"));
-            System.out.println("rs.getString(\"TYPE_NAME\") = " + rs.getString("TYPE_NAME"));
-            System.out.println("rs.getString(\"COLUMN_SIZE\") = " + rs.getString("COLUMN_SIZE"));
-            System.out.println("rs.getString(\"BUFFER_LENGTH\") = " + rs.getString("BUFFER_LENGTH"));
-            System.out.println("rs.getString(\"DECIMAL_DIGITS\") = " + rs.getString("DECIMAL_DIGITS"));
-            System.out.println("rs.getString(\"NUM_PREC_RADIX\") = " + rs.getString("NUM_PREC_RADIX"));
-            System.out.println("rs.getString(\"NULLABLE\") = " + rs.getString("NULLABLE"));
-            System.out.println("rs.getString(\"REMARKS\") = " + rs.getString("REMARKS"));
-            System.out.println("rs.getString(\"COLUMN_DEF\") = " + rs.getString("COLUMN_DEF"));
-            System.out.println("rs.getString(\"SQL_DATA_TYPE\") = " + rs.getString("SQL_DATA_TYPE"));
-            System.out.println("rs.getString(\"SQL_DATETIME_SUB\") = " + rs.getString("SQL_DATETIME_SUB"));
-            System.out.println("rs.getString(\"CHAR_OCTET_LENGTH\") = " + rs.getString("CHAR_OCTET_LENGTH"));
-            System.out.println("rs.getString(\"ORDINAL_POSITION\") = " + rs.getString("ORDINAL_POSITION"));
-            System.out.println("rs.getString(\"IS_NULLABLE\") = " + rs.getString("IS_NULLABLE"));
-            System.out.println("rs.getString(\"IS_AUTOINCREMENT\") = " + rs.getString("IS_AUTOINCREMENT"));
+            /*以下注释为预扩展内容，如有需要，打开注释自行编译*/
+            /*目录名称【所在数据库名称】*/
+//            String tableCat = rs.getString("TABLE_CAT");
+            /*表架构名称*/
+//            String tableSchem = rs.getString("TABLE_SCHEM");
+            /*表名称 即传入参数tableName*/
+//            String tableName1 = rs.getString("TABLE_NAME");
+            /*数据类型 作用不明，自行扩展*/
+//            String dataType = rs.getString("DATA_TYPE");
+            /*列精度*/
+//            String columnSize = rs.getString("COLUMN_SIZE");
+            /*数据的传输大小*/
+//            String bufferLength = rs.getString("BUFFER_LENGTH");
+            /*列的小数位数*/
+//            String decimalDigits = rs.getString("DECIMAL_DIGITS");
+            /*列的基数*/
+//            String numPrecRadix = rs.getString("NUM_PREC_RADIX");
+            /*是否可以为null*/
+//            String nullable = rs.getString("NULLABLE");
+            /*列默认值*/
+//            String columnDef = rs.getString("COLUMN_DEF");
+            /*SQL 数据类型在描述符的 TYPE 字段中显示的值*/
+//            String sqlDataType = rs.getString("SQL_DATA_TYPE");
+            /*datetime 及 SQL-92 interval 数据类型的子类型代码*/
+//            String sqlDatetimeSub = rs.getString("SQL_DATETIME_SUB");
+            /*列中的最大字节数*/
+//            String charOctetLength = rs.getString("CHAR_OCTET_LENGTH");
+            /*列在表中的索引*/
+//            String ordinalPosition = rs.getString("ORDINAL_POSITION");
+
+            /*列名称*/
+            String columnName = rs.getString("COLUMN_NAME");
+            /*数据类型名称*/
+            String typeName = rs.getString("TYPE_NAME");
+            String columnType = sql2Java(typeName);
+            /*注释*/
+            String remarks = rs.getString("REMARKS");
+            /*是否允许为null*/
+            String isNullable = rs.getString("IS_NULLABLE");
+            /*是否为自当递增*/
+            String isAutoincrement = rs.getString("IS_AUTOINCREMENT");
             Field field = new Field();
+            field.setFieldNameInDb(columnName);
+            field.setFieldName(StringUtil.fieldCamelStyle(columnName));
+            field.setFieldType(sql2Java(columnType));
+            field.setAutoincrement(isAutoincrement);
+            field.setRemark(remarks);
+            field.setNotNull(isNullable);
+            field.setUpperFieldName(StringUtil.toCamelStyle(columnName));
             columns.add(field);
         }
         rs.close();
@@ -53,7 +83,9 @@ public class MySql {
         List<Table> tables = new ArrayList<>();
         while (rs.next()) {
             String tableName = rs.getString("TABLE_NAME");
-            ResultSet resultSet = statement.executeQuery("SELECT TABLE_COMMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '" + schemaName + "' AND TABLE_NAME = '" + tableName + "'");
+            ResultSet resultSet = statement.executeQuery(
+                    "SELECT TABLE_COMMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '"
+                            + schemaName + "' AND TABLE_NAME = '" + tableName + "'");
             String remarks = "";
             while (resultSet.next()) {
                 remarks = resultSet.getString(1);

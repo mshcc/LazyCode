@@ -128,4 +128,8 @@ public class Oracle {
                 return "unKnow";
         }
     }
+
+    public static void main(String[] args) {
+
+    }
 }

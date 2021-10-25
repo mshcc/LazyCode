@@ -60,7 +60,7 @@ public class DbUtil {
         DbType dbType = DbType.valueOf(config.getDbType());
         String url = dbType.getConnectionUrlPattern();
         if (dbType.equals(DbType.MySQL) || dbType.equals(DbType.MySQL_8)) {
-            return url = String.format(url, config.getHost(), config.getPort(), config.getSchema(), "false");
+            return  String.format(url, config.getHost(), config.getPort(), config.getSchema(), "false");
         } else if (dbType.equals(DbType.Oracle)) {
             return String.format(url, config.getHost(), config.getPort(), config.getSchema());
         }
@@ -103,11 +103,11 @@ public class DbUtil {
                 case "Oracle":
                     return Oracle.getTableFields(md, dbConfig.getSchema(), tableName);
                 default:
-                    DialogUtil.showMsg("非法数据库类型  " + dbConfig.getDbType());
+//                    DialogUtil.showMsg("非法数据库类型  " + dbConfig.getDbType());
                     return null;
             }
         } catch (Exception e) {
-            DialogUtil.showMsg("获取表信息失败，错误信息：" + e.getMessage());
+//            DialogUtil.showMsg("获取表信息失败，错误信息：" + e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -133,4 +133,7 @@ public class DbUtil {
         return result;
     }
 
+    public static void main(String[] args) {
+        getTableFields(new DbConfig.Builder().dbType("MySQL").schema("evaluate").host("mshcc").username("root").port("3306").password("ab111403").build(), "prize");
+    }
 }

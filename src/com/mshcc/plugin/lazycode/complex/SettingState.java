@@ -4,11 +4,13 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
+import com.mshcc.plugin.lazycode.complex.custom.Field;
+import com.mshcc.plugin.lazycode.complex.custom.Template;
 import com.mshcc.plugin.lazycode.entity.SettingConfig;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: mshcc
@@ -19,13 +21,28 @@ import java.util.ArrayList;
 public class SettingState implements PersistentStateComponent<SettingConfig> {
     SettingConfig settingConfig;
 
+    /**
+     * 内置模板与字段，嵌入代码
+     */
+    public static List<Template> templates = List.of(
+            new Template("JavaEntity", "inline/JavaEntity.ftl", true),
+            new Template("JavaMapper", "inline/JavaMapper.ftl", true),
+            new Template("JavaMapperXml", "inline/JavaMybatisXml.ftl", true),
+            new Template("JavaService", "inline/JavaService.ftl", true),
+            new Template("JavaServiceImpl", "inline/JavaServiceImpl.ftl", true),
+            new Template("JavaController", "inline/JavaController.ftl", true)
+    );
+    public static List<Field> fields = List.of(
+            new Field("test", "test", true)
+    );
+
     @Override
     public @Nullable
     SettingConfig getState() {
         if (settingConfig == null) {
             settingConfig = new SettingConfig();
-            settingConfig.fields = new ArrayList<>();
-            settingConfig.templates = new ArrayList<>();
+            settingConfig.fields = fields;
+            settingConfig.templates = templates;
         }
         return settingConfig;
     }
